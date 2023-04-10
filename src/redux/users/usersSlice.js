@@ -37,7 +37,32 @@ const initialState = {
 const usersSlice = createSlice({
   name: 'users',
   initialState,
-  extraReducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(
+        fetchAllUsers.pending,
+        (state) => ({
+          ...state,
+          isLoading: true,
+        }),
+      )
+
+      .addCase(
+        fetchAllUsers.fulfilled,
+        (state, payload) => ({
+          ...state,
+          users: payload.data,
+        }),
+      )
+
+      .addCase(
+        fetchAllUsers.rejected,
+        (state, payload) => ({
+          ...state,
+          error: payload.error,
+        }),
+      );
+  },
 });
 
 export default usersSlice.reducer;
