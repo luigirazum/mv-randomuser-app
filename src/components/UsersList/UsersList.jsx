@@ -1,9 +1,16 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectUsersStore } from '../../redux/users/usersSelectors';
 import User from '../User/User';
+import { fetchAllUsers } from '../../redux/users/usersSlice';
 
 const UsersList = () => {
   const { users, isLoading, error } = useSelector(selectUsersStore);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAllUsers());
+  }, [dispatch]);
 
   if (isLoading) {
     /** ==========================
