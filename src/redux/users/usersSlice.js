@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const testUsers = [
   {
@@ -12,6 +13,20 @@ const testUsers = [
     last: 'carrera',
   },
 ];
+
+const FETCH_USERS = 'users/fetchAllUsers';
+
+const fetchAllUsers = createAsyncThunk(
+  FETCH_USERS,
+  async (_, thunkAPI) => {
+    try {
+      const resp = await axios.get('https://randomuser.me/api/?results=5');
+      return resp.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  },
+);
 
 const initialState = {
   users: [...testUsers],
