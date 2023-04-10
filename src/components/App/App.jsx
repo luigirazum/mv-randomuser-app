@@ -1,5 +1,5 @@
-import UsersList from './components/UsersList/UsersList';
-import './styles/App.css';
+import UsersList from '../UsersList/UsersList';
+import '../../styles/App.css';
 
 const App = () => (
   <main>
