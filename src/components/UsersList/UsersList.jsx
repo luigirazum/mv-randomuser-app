@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { selectUsersStore } from '../../redux/users/usersSelectors.js';
+import { selectUsersStore } from '../../redux/users/usersSelectors';
 import User from '../User/User';
 
 const UsersList = () => {
@@ -19,6 +19,7 @@ const UsersList = () => {
   }
   return (
     <section>
+      <h2>current users</h2>
       {
       /** ==========================
        *  display error conditional
@@ -30,11 +31,23 @@ const UsersList = () => {
       </aside>
       )
       }
-      <ul>
-        { users.map((user) => (
-          <User key={user.uuid} id={user.uuid} />
-        ))}
-      </ul>
+      {
+      /**
+       * display no users conditional
+       */
+      users.length === 0 ? (
+        <aside>
+          <h5>status</h5>
+          <p>there are no users</p>
+        </aside>
+      ) : (
+        <ul>
+          { users.map((user) => (
+            <User key={user.uuid} id={user.uuid} />
+          ))}
+        </ul>
+      )
+      }
     </section>
   );
 };
