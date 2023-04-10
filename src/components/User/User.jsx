@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { selectUserById } from '../../redux/users/usersSelectors';
 
 const User = ({ id }) => {
-  const { first, last } = useSelector((store) => selectUserById(store, id));
+  const [{ first, last }] = useSelector((store) => selectUserById(store, id));
+
   return (
     <li>
       <p>
